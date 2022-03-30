@@ -1,0 +1,38 @@
+{
+  "name": "penrose-motif",
+  "version": "1.0.0",
+  "description": "Hungarian Etnographic Motives arranged with Penrose tiling",
+  "main": "index.js",
+  "scripts": {
+    "build": "run-s clean build:*",
+    "serve": "browser-sync start -s dist -f dist",
+    "watch": "run-s build _watch",
+    "clean": "rimraf dist",
+    "_scss": "sass --style=compressed --load-path=node_modules src/scss:dist/css",
+    "_autoprefixer": "postcss -u autoprefixer -r dist/css/**/*.css",
+    "_copy": "copyfiles -u 1 -e src/scss/**/* -e src/ts/**/* src/**/* dist",
+    "_watch": "run-p serve watch:*",
+    "build:css": "run-s _scss _autoprefixer",
+    "build:tsc": "tsc",
+    "build:assets": "npm run _copy",
+    "watch:tsc": "tsc -w",
+    "watch:scss": "onchange -v src/scss/** -- npm run build:css",
+    "watch:assets": "onchange -v src/** -e src/scss/**/* -e src/ts/**/* -- npm run build:assets",
+    "sass:help": "sass --help"
+  },
+  "author": "krisztian.garai@moon42.com",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "browser-sync": "^2.27.9",
+    "copyfiles": "^2.4.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "postcss": "^8.4.12",
+    "postcss-cli": "^9.1.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.49.9",
+    "typescript": "^4.6.2"
+  },
+  "keywords": []
+}

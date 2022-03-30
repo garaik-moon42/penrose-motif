@@ -1,0 +1,49 @@
+@use "sass:math";
+
+$base-length: 100px;
+$phi: math.div(1 + math.sqrt(5), 2);
+$sinPiOver5: math.sin(math.div(math.$pi, 5));
+$sin2PiOver5: math.sin(math.div(2 * math.$pi, 5));
+
+#tessellation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: clip;
+}
+
+.rhomb {
+  position: absolute;
+  transform-origin: top left;
+  //transform: scale(1, -1) translateY(-50%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    transform-origin: center center;
+  }
+}
+
+.thick {
+  background: linear-gradient(#aaa, #fff);
+  width: $base-length * (1 + $phi);
+  height: $base-length * 2 * $phi * $sinPiOver5;
+
+  img {
+    //transform: scale(.7) translate(5px, 10px) rotate(.25turn);
+    transform: scale(.3) translate(5px, 10px) rotate(.25turn);
+  }
+}
+
+.thin {
+  background: linear-gradient(#fff, #888);
+  width: $base-length;
+  height: $base-length * 2 * $phi * $sin2PiOver5;
+
+  img {
+    //transform: scale(1) translate(-30px, -20px) rotate(.16turn);
+    transform: scale(.45) translate(-30px, -20px) rotate(.16turn);
+  }
+}
